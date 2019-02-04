@@ -31,7 +31,7 @@ class LogIn extends Component {
                 } else if (res.data.validate === true ) {
                     console.log("logged in!")
 					localStorage.setItem('session_token', res.data.token)
-					localStorage.setItem('user_id', res.data.id)
+					localStorage.setItem('id', res.data.id)
 					localStorage.setItem('name', res.data.name)
 					localStorage.setItem('auth', true)
 					this.props.history.push('/dashboard')
