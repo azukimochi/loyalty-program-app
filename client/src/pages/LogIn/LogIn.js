@@ -34,7 +34,7 @@ class LogIn extends Component {
 					localStorage.setItem('user_id', res.data.id)
 					localStorage.setItem('name', res.data.name)
 					localStorage.setItem('auth', true)
-					// this.props.history.push('/dashboard')
+					this.props.history.push('/dashboard')
 				}
 			})
 			.catch(err => {
