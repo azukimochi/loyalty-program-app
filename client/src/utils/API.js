@@ -9,6 +9,11 @@ export default {
   getBalance: function(reqObj) {
     return axios.get("/api/info/balance/" + reqObj.id,
     {headers: {"Authorization" : `Bearer ${reqObj.token}`}}
+  )},
+
+  getInventory: function(token) {
+    return axios.get("/api/info/inventory/",
+    {headers: {"Authorization" : `Bearer ${token}`}}
   )}
 
 };

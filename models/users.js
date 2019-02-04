@@ -8,7 +8,7 @@ const userSchema = new Schema({
   lastName: { type: String, minlength: 1, required: true },
   balance: { type: Number, min: 0, required: true },
 
-  order: [{
+  orders: [{
     type: Schema.Types.ObjectId,
     ref: "Order"
   }]

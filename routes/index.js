@@ -4,11 +4,8 @@ const apiRoutes = require("./api")
 const userRoutes = require("./users.js")
 const jwt = require('jsonwebtoken')
 
-router.use("/api", verifytoken, apiRoutes)
-router.use("/users", userRoutes)
-
 // Verify Token Before Continuting with API routes 
-function verifytoken(req, res, next) {
+const verifytoken = (req, res, next) => {
   //Get auth header value
    const bearerHeader = req.headers['authorization']
   //Check if bearer is undefined
@@ -44,7 +41,11 @@ function verifytoken(req, res, next) {
   }
 }
 
-router.use(function(req, res) {
+router.use("/api", verifytoken, apiRoutes)
+router.use("/users", userRoutes)
+
+
+router.use((req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"))
 })
 
