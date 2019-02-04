@@ -5,7 +5,7 @@ const ColourDropDown = props => (
     <select name="colour" value={props.colour} onChange={props.handleColourChange}>
     <option value="None">Select a colour</option>
     {props.availableColours.map(colour => (
-        <option>{colour.colour}</option>
+        <option key={colour._id}>{colour.colour}</option>
     ))}
     </select>
     </div>
