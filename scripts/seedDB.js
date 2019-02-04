@@ -35,7 +35,10 @@ const inventorySeed = [
 const usersSeed = [
   {
     email: "karen.kuak@gmail.com",
-    password: "dummyTest1234!"
+    password: "dummyTest1234!",
+    firstName: "Karen",
+    lastName: "Kua",
+    balance: 100000
   }
 ]
 

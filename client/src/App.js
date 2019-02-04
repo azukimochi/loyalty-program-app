@@ -1,7 +1,24 @@
-import React from "react"
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import LogIn from './pages/LogIn/LogIn';
+// import Sidebar from "./components/Sidebar";
 
-const App = () => {
-    return<div>Hi world</div>
-}
+const App = () => (
+  <Router>
+    <div>
+      {/* <Sidebar /> */}
+      <Switch>
+      <Route exact path="/" component={LogIn} />
+        {/* <Route exact path="/upload" component={Upload} />
+        <Route exact path="/upload-success" component={UploadSuccess} />
+        <Route exact path="/upload-user-input" component={NoReceipt} />
+        <Route exact path="/browse" component={Browse} />
+        <Route exact path="/login" component={LogIn} />
+        <Route exact path="/sign-up" component={SignUp} /> */}
+      </Switch>
+    </div>
+  </Router>
+);
 
-export default App
+export default App;
+

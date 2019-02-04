@@ -1,11 +1,12 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-// const bcrypt = require('bcryptjs');
-
 const userSchema = new Schema({
-  email: { type: String, required: true },
-  password: { type: String, required: true },
+  email: { type: String, minlength: 6, required: true },
+  password: { type: String, minlength: 6, required: true },
+  firstName: { type: String, minlength: 1, required: true },
+  lastName: { type: String, minlength: 1, required: true },
+  balance: { type: Number, min: 0, required: true },
 
   order: [{
     type: Schema.Types.ObjectId,
