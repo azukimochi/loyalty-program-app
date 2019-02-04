@@ -9,12 +9,11 @@ class LogIn extends Component {
 	}
 
 	onInputChange = event => {
-		this.setState({ [event.target.name]: event.target.value }
-		)
+        this.setState({ [event.target.name]: event.target.value })
 	}
 
 	onFormSubmit = event => {
-		event.preventDefault();
+        event.preventDefault();
 		const loginData = {
 			email: this.state.email,
 			password: this.state.password
@@ -29,10 +28,11 @@ class LogIn extends Component {
 						email: "",
 						password: ""
 					})
-				} else {
+                } else if (res.data.validate === true ) {
+                    console.log("logged in!")
 					localStorage.setItem('session_token', res.data.token)
 					localStorage.setItem('user_id', res.data.id)
-					localStorage.setItem('username', res.data.name)
+					localStorage.setItem('name', res.data.name)
 					localStorage.setItem('auth', true)
 					// this.props.history.push('/dashboard')
 				}
@@ -59,14 +59,15 @@ class LogIn extends Component {
 								type="password"
 								placeholder="Password"
 								name="password"
-								value={this.state.password}
+                                value={this.state.password}
+                                autoComplete="current-password"
 								pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
 								title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters"
 								onChange={this.onInputChange}
 								required />
 
 							<div>
-								<button onClick={this.onFormSubmit}>Log In</button>
+								<button>Log In</button>
 							</div>
 						</form>
 						{this.state.statusMsg}

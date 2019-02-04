@@ -1,11 +1,9 @@
 const db = require('../models')
-const jwt = require("jsonwebtoken");
-// const bcrypt = require("bcrypt");
-// const saltRounds = 10;
+const jwt = require("jsonwebtoken")
 
 module.exports = {
 	logIn: (req, res) => {
-		db.User
+		db.Users
 			.findOne({ email: req.body.email })
 			.then(dbUser => {
 				if (dbUser === null) {
@@ -14,14 +12,14 @@ module.exports = {
 					})
 				} else {
 						if (dbUser.password === req.body.password) {
-							let user = dbUser.username
+							let user = dbUser
 							jwt.sign({ user }, "secretkey", { expiresIn: "300s" },
 								(err, token) => {
 									res.json({
 										validate: true,
 										token: token,
 										id: dbUser._id,
-										name: dbUser.name
+										name: dbUser.firstName
 									});
 								}
 							);

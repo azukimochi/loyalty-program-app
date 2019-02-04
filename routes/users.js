@@ -3,6 +3,6 @@ usersRouter = require("express").Router();
 usersCtrl = require('../controllers/userControllers.js')
 
 usersRouter.route('/logIn')
-	.get(usersCtrl.logIn)
+	.post(usersCtrl.logIn)
 
 module.exports = usersRouter
