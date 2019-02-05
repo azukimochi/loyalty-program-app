@@ -38,10 +38,11 @@ module.exports = {
             return db.Users
             .findByIdAndUpdate(
                 {_id: req.body.userId},
-                { $push: { orders: dbOrder._id}},
+                { $inc: {balance: -(req.body.redemptionValue)}, $push: { orders: dbOrder._id}},
                 {new: true}
             )
+            .then(dbModel => res.json(dbModel))
         })
-        .catch(err => res.status(422).json(err))
+        .catch(err => console.log(err))
     }
 }
