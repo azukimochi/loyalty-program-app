@@ -7,28 +7,34 @@ mongoose.connect(
 
 const inventorySeed = [
   {
-    colour: "red",
-    qty: 100
+    colour: "Red",
+    qty: 100,
+    price: 2000
   },
   {
-    colour: "blue",
-    qty: 100
+    colour: "Blue",
+    qty: 100,
+    price: 2000
   },
   {
-    colour: "white",
-    qty: 100
+    colour: "White",
+    qty: 100,
+    price: 1000
   },
   {
-    colour: "orange",
-    qty: 100
+    colour: "Orange",
+    qty: 100,
+    price: 2000
   },
   {
-    colour: "pink",
-    qty: 100
+    colour: "Pink",
+    qty: 100,
+    price: 10000
   },
   {
-    colour: "black",
-    qty: 100
+    colour: "Black",
+    qty: 100,
+    price: 3000
   }
 ]
 

@@ -1,16 +1,19 @@
 import React, { Component } from "react"
 import API from "../../utils/API"
-import ColourDropDown from "../../components/DropDown/ColourDropDown"
+import ColourDropDown from "../../components/DropDowns/ColourDropDown"
+import QtyDropDown from "../../components/DropDowns/QtyDropDown"
 
 class Dashboard extends Component {
     state = {
         balance: null,
-        availableColours: null
+        availableColours: null,
+        colour: "None"
     }
     
     componentDidMount = () => {
     this.getBalance()
-    this.getInventory()        
+    this.getInventory() 
+    console.log(this.state.availableQty)       
     }
 
     getBalance = () => {
@@ -46,12 +49,14 @@ class Dashboard extends Component {
             .catch(err => console.log(err))
     }
 
-    handleColourChange = event => {
+    handleDropDownChange = event => {
         let { name, value } = event.target;
-        this.setState({ [name]: value }, () => console.log(this.state.colour))
+        this.setState({ [name]: value }, () => console.log(this.state))
     }
 
     render() {
+        const availableQty = [...Array(6).keys()]
+        availableQty.splice(0,1)
         return(
             <div className="dashboardContainer">
             {this.state.balance !== null ? 
@@ -62,11 +67,19 @@ class Dashboard extends Component {
         <ColourDropDown 
         availableColours = {this.state.availableColours}
         colour = {this.state.colour}
-        handleColourChange = {this.handleColourChange}
+        handleDropDownChange = {this.handleDropDownChange}
         />
         : null
         }
-            </div>
+
+        <QtyDropDown 
+        availableQty = {availableQty}
+        qty = {this.state.qty}
+        handleDropDownChange = {this.handleDropDownChange}
+        />
+
+        <button>Redeem</button>
+        </div>
         )
     }
 }
