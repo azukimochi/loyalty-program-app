@@ -19,7 +19,6 @@ const ConfirmationModal = props => {
     <div>
       <Modal
         isOpen={props.modalIsOpen}
-        onAfterOpen={props.afterOpenModal}
         onRequestClose={props.closeModal}
         style={customStyles}
       >
@@ -37,7 +36,7 @@ const ConfirmationModal = props => {
             Redeem
           </button>
 
-          <button className="ui red button" onClick={() => props.negativeHandler}>
+          <button className="ui red button" onClick={props.negativeHandler}>
             <i className="check icon"></i>
             Cancel
         </button>

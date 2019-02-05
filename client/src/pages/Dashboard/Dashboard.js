@@ -3,13 +3,16 @@ import API from "../../utils/API"
 import ColourDropDown from "../../components/DropDowns/ColourDropDown"
 import QtyDropDown from "../../components/DropDowns/QtyDropDown"
 import ConfirmationModal from "../../components/Modals/ConfirmationModal"
+import SuccessModal from "../../components/Modals/SuccessModal"
+import FailureModal from "../../components/Modals/FailureModal"
 
 class Dashboard extends Component {
     state = {
         balance: null,
         availableColours: null,
         colour: "None",
-        modalIsOpen: false
+        modalIsOpen: false,
+        modalSwitchExp: "failByQty"
     }
     
     componentDidMount = () => {
@@ -57,7 +60,8 @@ class Dashboard extends Component {
     }
 
     openModal = () => {
-        this.setState({ modalIsOpen: true })
+        this.setState({ modalIsOpen: true },
+        () => console.log("opening modal", this.state.modalSwitchExp))
     }
 
     // afterOpenModal = () => {
@@ -66,6 +70,60 @@ class Dashboard extends Component {
 
     closeModal = () => {
         this.setState({ modalIsOpen: false });
+    }
+
+    renderModalSwitch(exp) {
+        console.log(exp)
+        switch(exp) {
+          case "confirmingOrder":
+            return(
+                <ConfirmationModal
+                modalIsOpen={this.state.modalIsOpen}
+                closeModal={this.closeModal}
+                redemptionValue={2000}
+                qty={this.state.qty}
+                colour={this.state.colour.toLowerCase()}
+                positiveHandler={this.closeModal}
+                negativeHandler={this.closeModal}
+                />
+            )
+            case "success":
+            return (
+                <SuccessModal
+                modalIsOpen={this.state.modalIsOpen}
+                closeModal={this.closeModal}
+                qty={this.state.qty}
+                colour={this.state.colour.toLowerCase()}
+                balance={this.state.balance}
+                positiveHandler={this.closeModal}
+                negativeHandler={this.closeModal}
+                />
+            )
+          case "failByBalance":
+            return (
+                <FailureModal
+                modalIsOpen={this.state.modalIsOpen}
+                closeModal={this.closeModal}
+                qty={this.state.qty}
+                colour={this.state.colour}
+                negativeHandler={this.closeModal}
+                reason={exp}
+                />
+            )
+          case "failByQty":
+            return (
+                <FailureModal
+                modalIsOpen={this.state.modalIsOpen}
+                closeModal={this.closeModal}
+                qty={this.state.qty}
+                colour={this.state.colour}
+                negativeHandler={this.closeModal}
+                reason={exp}
+                />
+            )
+          default:
+            return null
+        }
     }
 
     render() {
@@ -94,6 +152,9 @@ class Dashboard extends Component {
 
         <button onClick={this.openModal}>Redeem</button>
         
+
+        {this.renderModalSwitch(this.state.modalSwitchExp)}
+
         </div>
         )
     }

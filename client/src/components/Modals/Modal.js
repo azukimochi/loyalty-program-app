@@ -14,7 +14,7 @@ const customStyles = {
 
 Modal.setAppElement('#root')
 
-const ConfirmationModal = props => {
+const Modal = props => {
   return (
     <div>
       <Modal
@@ -45,12 +45,13 @@ const ConfirmationModal = props => {
   )
 }
 
-export default ConfirmationModal
+export default Modal
 
 
 // ConfirmationModal
 // sum of points to redeem
 // colour
+// qty
 // cancel handler
 // redeem handler (check that you have enough balance and that there's enough in stock)
 
