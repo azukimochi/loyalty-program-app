@@ -158,6 +158,11 @@ class Dashboard extends Component {
         .catch(err => console.log(err))
     }
 
+    logOut = () => {
+        localStorage.clear()
+        this.props.history.push("/")
+    }
+
     renderModalSwitch(exp) {
         switch(exp) {
           case "confirmingOrder":
@@ -181,7 +186,7 @@ class Dashboard extends Component {
                 colour={this.state.colour.toLowerCase()}
                 balance={this.state.balance}
                 positiveHandler={this.closeModal}
-                negativeHandler={this.closeModal}
+                negativeHandler={this.logOut}
                 />
             )
           case "failByBalance":
