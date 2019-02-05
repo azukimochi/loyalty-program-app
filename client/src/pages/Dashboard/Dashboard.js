@@ -12,7 +12,9 @@ class Dashboard extends Component {
         availableColours: null,
         colour: "None",
         modalIsOpen: false,
-        modalSwitchExp: "failByQty"
+        modalSwitchExp: "confirmingOrder",
+        qty: 1,
+        colourErrMsg: null
     }
     
     componentDidMount = () => {
@@ -64,12 +66,18 @@ class Dashboard extends Component {
         () => console.log("opening modal", this.state.modalSwitchExp))
     }
 
-    // afterOpenModal = () => {
-    //     this.subtitle.style.color = '#f00';
-    // }
-
     closeModal = () => {
         this.setState({ modalIsOpen: false });
+    }
+
+    checkOrderIsValid = () => {
+        this.setState({colourErrMsg: null})
+        if (this.state.colour === "None") {
+            this.setState({colourErrMsg: "Please select a colour."})
+        } else {
+            this.setState({modalSwitchExp: "confirmingOrder"},
+            () => this.openModal())
+        }
     }
 
     renderModalSwitch(exp) {
@@ -150,8 +158,8 @@ class Dashboard extends Component {
         handleDropDownChange = {this.handleDropDownChange}
         />
 
-        <button onClick={this.openModal}>Redeem</button>
-        
+        <button onClick={this.checkOrderIsValid}>Redeem</button>
+        <div>{this.state.colourErrMsg}</div>
 
         {this.renderModalSwitch(this.state.modalSwitchExp)}
 

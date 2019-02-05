@@ -27,7 +27,7 @@ const ConfirmationModal = props => {
           <br />
           <h2>Are you sure?</h2>
           <div className="modalBlurb">
-          You are about to redeem {props.redemptionValue} points for {props.qty} {props.colour} AirBuds
+          You are about to redeem {props.redemptionValue} points for {props.qty} {props.colour} AirBud(s).
           </div>
           <br />
             

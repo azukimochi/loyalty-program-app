@@ -27,7 +27,7 @@ const SuccessModal = props => {
           <br />
           <h2>Success!</h2>
           <div className="modalBlurb">
-          <h4>Redeemed: {props.qty} {props.colour} AirBuds </h4>
+          <h4>Redeemed: {props.qty} {props.colour} AirBud(s) </h4>
           <h4>Current Balance: {props.balance} points</h4>
           <br />
           <p>Do you want to redeem another AirBud?</p>
