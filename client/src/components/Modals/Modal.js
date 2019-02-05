@@ -29,14 +29,7 @@ const ConfirmationModal = props => {
           <h2>{props.header}</h2>
           <div className="modalBlurb">{props.blurb}</div>
           <br />
-
-          {props.rejectionMsg ? 
-          <button id="returnAfterFailureBtn" className="ui red button" onClick={() => props.inactiveHandler}>
-          <i className={props.inactiveIcon}></i>
-          {props.inactiveBtnMsg}
-          </button>
-            :
-           <div className="rejectionMsgBtns"> 
+            
           <button className="ui green button" onClick={props.activeHandler}>
             <i className={props.activeIcon}></i>
             {props.activeBtnMsg}
@@ -45,9 +38,7 @@ const ConfirmationModal = props => {
           <button className="ui red button" onClick={() => props.inactiveHandler}>
             <i className={props.inactiveIcon}></i>
             {props.inactiveBtnMsg}
-            </button>
-        </div>
-            }
+        </button>
         </div>
       </Modal>
     </div>
@@ -55,3 +46,20 @@ const ConfirmationModal = props => {
 }
 
 export default ConfirmationModal
+
+
+// ConfirmationModal
+// sum of points to redeem
+// colour
+// cancel handler
+// redeem handler (check that you have enough balance and that there's enough in stock)
+
+// FailureModal
+// go back handler 
+// blurb: saying either you don't have enough balance or there's not enough items in stock
+
+// SuccessModal
+// colour
+// balance
+// logout handler
+// Return to Screen 2 handler 

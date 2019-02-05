@@ -2,13 +2,14 @@ import React, { Component } from "react"
 import API from "../../utils/API"
 import ColourDropDown from "../../components/DropDowns/ColourDropDown"
 import QtyDropDown from "../../components/DropDowns/QtyDropDown"
-import Modal from "../../components/Modal/Modal"
+import ConfirmationModal from "../../components/Modals/ConfirmationModal"
 
 class Dashboard extends Component {
     state = {
         balance: null,
         availableColours: null,
-        colour: "None"
+        colour: "None",
+        modalIsOpen: false
     }
     
     componentDidMount = () => {
@@ -91,7 +92,8 @@ class Dashboard extends Component {
         handleDropDownChange = {this.handleDropDownChange}
         />
 
-        <button>Redeem</button>
+        <button onClick={this.openModal}>Redeem</button>
+        
         </div>
         )
     }
