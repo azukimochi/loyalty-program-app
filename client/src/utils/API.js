@@ -22,7 +22,7 @@ export default {
   )},
 
   insertOrder: orderDetails => {
-    return axios.post("/api/order/create", orderDetails,
+    return axios.put("/api/order/create", orderDetails,
     {headers: {"Authorization" : `Bearer ${orderDetails.token}`}}
   )},
 
