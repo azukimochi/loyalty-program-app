@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import API from "../../utils/API"
 import ColourDropDown from "../../components/DropDowns/ColourDropDown"
 import QtyDropDown from "../../components/DropDowns/QtyDropDown"
+import Modal from "../../components/Modal/Modal"
 
 class Dashboard extends Component {
     state = {
@@ -52,6 +53,18 @@ class Dashboard extends Component {
     handleDropDownChange = event => {
         let { name, value } = event.target;
         this.setState({ [name]: value }, () => console.log(this.state))
+    }
+
+    openModal = () => {
+        this.setState({ modalIsOpen: true })
+    }
+
+    // afterOpenModal = () => {
+    //     this.subtitle.style.color = '#f00';
+    // }
+
+    closeModal = () => {
+        this.setState({ modalIsOpen: false });
     }
 
     render() {
