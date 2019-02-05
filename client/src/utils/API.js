@@ -19,7 +19,12 @@ export default {
   showItemQty: reqObj => {
     return axios.get("/api/info/inventory/" + reqObj.colour,
     {headers: {"Authorization" : `Bearer ${reqObj.token}`}}
-  )}
+  )},
+
+  insertOrder: orderDetails => {
+    return axios.post("/api/order/create", orderDetails,
+    {headers: {"Authorization" : `Bearer ${orderDetails.token}`}}
+  )},
 
 };
 

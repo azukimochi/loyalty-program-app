@@ -3,6 +3,8 @@ const Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
   colour: { type: String, required: true },
+  qty: { type: Number, required: true },
+  redemptionValue: { type: Number, required: true },
   date: { type: Date, default: Date.now, required: true },
   userId: { type: String, required: true},
 });

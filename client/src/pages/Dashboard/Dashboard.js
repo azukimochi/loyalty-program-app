@@ -90,6 +90,7 @@ class Dashboard extends Component {
     closeModal = () => {
         this.setState({ modalIsOpen: false })
         this.getBalance()
+        this.getInventory()
     }
 
     openConfirmationModal = () => {
@@ -114,6 +115,7 @@ class Dashboard extends Component {
                         console.log("Not enough balance")
                         this.setState({modalSwitchExp: "failByBalance"})
                     } else {
+                        this.setState({balance: res.data.balance})
                         this.checkQtyIsValid()
                     }
                 }
@@ -125,6 +127,26 @@ class Dashboard extends Component {
         API.showItemQty({
             colour: this.state.colour,
             token: this.state.token
+        })
+        .then(res => {
+            if (res.data.qty < this.state.qty) {
+                console.log("Not enough units in stock")
+                this.setState({modalSwitchExp: "failByQty"})
+            } else {
+                console.log("enough units in stock")
+                this.completeOrder()
+            }
+        })
+        .catch(err => console.log(err))
+    }
+
+    completeOrder = () => {
+        API.insertOrder({
+            token: this.state.token,
+            userId: this.state.id,
+            colour: this.state.colour,
+            qty: this.state.qty,
+            redemptionValue: this.state.redemptionValue
         })
         .then(res => {
             console.log(res)
