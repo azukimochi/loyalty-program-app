@@ -31,14 +31,14 @@ const ConfirmationModal = props => {
           </div>
           <br />
             
-          <button className="ui green button" onClick={props.positiveHandler}>
-            <i className="check icon"></i>
-            Redeem
-          </button>
-
-          <button className="ui red button" onClick={props.negativeHandler}>
+          <button className="ui green button" onClick={props.negativeHandler}>
             <i className="check icon"></i>
             Cancel
+          </button>
+
+          <button className="ui red button" onClick={props.positiveHandler}>
+            <i className="check icon"></i>
+            Redeem
         </button>
         </div>
       </Modal>

@@ -7,4 +7,7 @@ router.route("/balance/:id")
 router.route("/inventory")
     .get(redemptionCtrl.getInventory)
 
+router.route("/inventory/:colour")
+    .get(redemptionCtrl.showItemQty)
+
 module.exports = router

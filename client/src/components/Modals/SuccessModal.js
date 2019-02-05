@@ -34,14 +34,14 @@ const SuccessModal = props => {
           </div>
           <br />
          
-          <button className="ui green button" onClick={props.positiveHandler}>
-            <i className="check icon"></i>
-            Redeem Another
-          </button>
-
-          <button className="ui red button" onClick={props.negativeHandler}>
+          <button className="ui green button" onClick={props.negativeHandler}>
             <i className="check icon"></i>
             Logout
+          </button>
+
+          <button className="ui red button" onClick={props.positiveHandler}>
+            <i className="check icon"></i>
+            Redeem Another
         </button>
         </div>
       </Modal>

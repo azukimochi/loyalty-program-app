@@ -6,7 +6,9 @@ import ConfirmationModal from "../../components/Modals/ConfirmationModal"
 import SuccessModal from "../../components/Modals/SuccessModal"
 import FailureModal from "../../components/Modals/FailureModal"
 
+
 class Dashboard extends Component {
+
     state = {
         balance: null,
         availableColours: null,
@@ -14,8 +16,9 @@ class Dashboard extends Component {
         modalIsOpen: false,
         modalSwitchExp: "confirmingOrder",
         qty: 1,
-        colourErrMsg: null,
-        redemptionValue: null
+        redemptionValue: null,
+        id: localStorage.getItem("id"),
+        token: localStorage.getItem("session_token")
     }
     
     componentDidMount = () => {
@@ -25,11 +28,14 @@ class Dashboard extends Component {
     }
 
     getBalance = () => {
-        const userData = {
-            id: localStorage.getItem("id"),
-            token: localStorage.getItem("session_token")
-        }
-        API.getBalance(userData)
+        // const userData = {
+        //     id: localStorage.getItem("id"),
+        //     token: localStorage.getItem("session_token")
+        // }
+        API.getBalance({
+            id: this.state.id,
+            token: this.state.token
+        })
             .then(res => {
                 console.log(res)
                 if (res.data.status === "404") {
@@ -43,7 +49,7 @@ class Dashboard extends Component {
     }
 
     getInventory = () => {
-        API.getInventory(localStorage.getItem("session_token"))
+        API.getInventory(this.state.token)
             .then(res => {
                 console.log(res)
                 if (res.data.status === "404") {
@@ -82,21 +88,51 @@ class Dashboard extends Component {
     }
 
     closeModal = () => {
-        this.setState({ modalIsOpen: false });
+        this.setState({ modalIsOpen: false })
+        this.getBalance()
     }
 
-    checkOrderIsValid = () => {
-        this.setState({colourErrMsg: null})
-        if (this.state.colour === "None") {
-            this.setState({colourErrMsg: "Please select a colour."})
-        } else {
+    openConfirmationModal = () => {
             this.setState({modalSwitchExp: "confirmingOrder"},
             () => this.openModal())
-        }
+    }
+
+    checkBalanceIsValid = () => {
+        API.getBalance({
+            id: this.state.id,
+            token: this.state.token
+        })
+            .then(res => {
+                console.log(res)
+                if (res.data.status === "404") {
+                    localStorage.clear()
+                    this.props.history.push("/")
+                } else {
+                    const remainingBalance = res.data.balance - this.state.redemptionValue
+                    console.log("remainingBalance", remainingBalance, typeof remainingBalance)
+                    if (remainingBalance < 0) {
+                        console.log("Not enough balance")
+                        this.setState({modalSwitchExp: "failByBalance"})
+                    } else {
+                        this.checkQtyIsValid()
+                    }
+                }
+            })
+            .catch(err => console.log(err))
+    }
+
+    checkQtyIsValid = () => {
+        API.showItemQty({
+            colour: this.state.colour,
+            token: this.state.token
+        })
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => console.log(err))
     }
 
     renderModalSwitch(exp) {
-        console.log(exp)
         switch(exp) {
           case "confirmingOrder":
             return(
@@ -106,7 +142,7 @@ class Dashboard extends Component {
                 redemptionValue={this.state.redemptionValue}
                 qty={this.state.qty}
                 colour={this.state.colour.toLowerCase()}
-                positiveHandler={this.closeModal}
+                positiveHandler={this.checkBalanceIsValid}
                 negativeHandler={this.closeModal}
                 />
             )
@@ -173,12 +209,10 @@ class Dashboard extends Component {
         handleDropDownChange = {this.handleDropDownChange}
         />
 
-        <button onClick={this.checkOrderIsValid}>Redeem</button>
-        <div>{this.state.colourErrMsg}</div>
+        <button onClick={this.openConfirmationModal}>Redeem</button>
         </div>
         : null
         }
-
 
         {this.renderModalSwitch(this.state.modalSwitchExp)}
 
