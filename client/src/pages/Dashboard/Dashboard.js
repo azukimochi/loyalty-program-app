@@ -38,7 +38,7 @@ class Dashboard extends Component {
         })
             .then(res => {
                 console.log(res)
-                if (res.data.status === "404") {
+                if (res.data.status === "404" || res.data === null) {
                     localStorage.clear()
                     this.props.history.push("/")
                 } else {
@@ -150,6 +150,10 @@ class Dashboard extends Component {
         })
         .then(res => {
             console.log(res)
+            this.setState({
+                balance: res.data.balance,
+                modalSwitchExp: "success"
+            })
         })
         .catch(err => console.log(err))
     }
