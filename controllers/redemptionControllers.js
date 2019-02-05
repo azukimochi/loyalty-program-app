@@ -10,7 +10,7 @@ module.exports = {
 
     getInventory: (req, res) => {
         db.Inventory
-        .find({})
+        .find({qty: {$not: {$lte: 0}}})
         .then(dbModel => res.json(dbModel))
         .catch(err => console.log(err))
     }
