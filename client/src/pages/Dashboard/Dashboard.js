@@ -10,17 +10,18 @@ class Dashboard extends Component {
     state = {
         balance: null,
         availableColours: null,
-        colour: "None",
+        colour: "",
         modalIsOpen: false,
         modalSwitchExp: "confirmingOrder",
         qty: 1,
-        colourErrMsg: null
+        colourErrMsg: null,
+        redemptionValue: null
     }
     
     componentDidMount = () => {
     this.getBalance()
     this.getInventory() 
-    console.log(this.state.availableQty)       
+    console.log(this.state) 
     }
 
     getBalance = () => {
@@ -49,8 +50,11 @@ class Dashboard extends Component {
                     localStorage.clear()
                     this.props.history.push("/")
                 } else {
-                    this.setState({availableColours: res.data},
-                    () => console.log(this.state.availableColours))
+                    this.setState({
+                        availableColours: res.data,
+                        redemptionValue: res.data[0].price,
+                        colour: res.data[0].colour
+                    }, () => console.log(this.state))
                 }
             })
             .catch(err => console.log(err))
@@ -58,7 +62,18 @@ class Dashboard extends Component {
 
     handleDropDownChange = event => {
         let { name, value } = event.target;
-        this.setState({ [name]: value }, () => console.log(this.state))
+        this.setState({ [name]: value }, () => {
+            console.log(this.state)
+            this.getRedemptionValue()
+        })
+    }
+
+    getRedemptionValue = () => {
+        const selectedColourObj = this.state.availableColours.filter(colourObj => colourObj.colour === this.state.colour)
+        console.log("selectedColourObj", selectedColourObj[0].price, typeof selectedColourObj[0].price)
+        let redemptionValue = selectedColourObj[0].price * this.state.qty
+        console.log("redemptionValue", redemptionValue, typeof redemptionValue)
+        this.setState({redemptionValue: redemptionValue})
     }
 
     openModal = () => {
@@ -88,7 +103,7 @@ class Dashboard extends Component {
                 <ConfirmationModal
                 modalIsOpen={this.state.modalIsOpen}
                 closeModal={this.closeModal}
-                redemptionValue={2000}
+                redemptionValue={this.state.redemptionValue}
                 qty={this.state.qty}
                 colour={this.state.colour.toLowerCase()}
                 positiveHandler={this.closeModal}
@@ -137,21 +152,21 @@ class Dashboard extends Component {
     render() {
         const availableQty = [...Array(6).keys()]
         availableQty.splice(0,1)
+
         return(
             <div className="dashboardContainer">
             {this.state.balance !== null ? 
-            <div>Balance: {this.state.balance}</div> 
+            <div>Balance: {this.state.balance} points</div> 
             : null
         }
         {this.state.availableColours !== null ? 
+        <div>
+            <div>Price: {this.state.redemptionValue} points</div>
         <ColourDropDown 
         availableColours = {this.state.availableColours}
         colour = {this.state.colour}
         handleDropDownChange = {this.handleDropDownChange}
         />
-        : null
-        }
-
         <QtyDropDown 
         availableQty = {availableQty}
         qty = {this.state.qty}
@@ -160,6 +175,10 @@ class Dashboard extends Component {
 
         <button onClick={this.checkOrderIsValid}>Redeem</button>
         <div>{this.state.colourErrMsg}</div>
+        </div>
+        : null
+        }
+
 
         {this.renderModalSwitch(this.state.modalSwitchExp)}
 
