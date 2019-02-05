@@ -6,6 +6,11 @@ export default {
     return axios.post("/users/logIn", loginData)
   },
 
+  checkUserIsLoggedIn: token => {
+    return axios.get("api/info/auth",
+    {headers: {"Authorization" : `Bearer ${token}`}}
+  )},
+
   getBalance: reqObj => {
     return axios.get("/api/info/balance/" + reqObj.id,
     {headers: {"Authorization" : `Bearer ${reqObj.token}`}}

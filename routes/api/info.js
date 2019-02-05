@@ -1,6 +1,12 @@
 const router = require("express").Router()
 const redemptionCtrl = require('../../controllers/redemptionControllers.js')
 
+router.get('/auth', (req, res) => {
+    res.json({
+        status: "200"
+    })
+})
+
 router.route("/balance/:id")
     .get(redemptionCtrl.getBalance)
     

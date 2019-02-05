@@ -8,6 +8,18 @@ class LogIn extends Component {
 		statusMsg: ""
 	}
 
+	componentDidMount = () => {
+		if (localStorage.getItem("session_token")) {
+			API.checkUserIsLoggedIn(localStorage.getItem("session_token"))
+				.then(res => {
+					if (res.data.status === "200") {
+						this.props.history.push("/dashboard")
+					}
+				})
+				.catch(err => console.log(err))
+
+		}
+	}
 	onInputChange = event => {
         this.setState({ [event.target.name]: event.target.value })
 	}

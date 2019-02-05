@@ -28,10 +28,6 @@ class Dashboard extends Component {
     }
 
     getBalance = () => {
-        // const userData = {
-        //     id: localStorage.getItem("id"),
-        //     token: localStorage.getItem("session_token")
-        // }
         API.getBalance({
             id: this.state.id,
             token: this.state.token
