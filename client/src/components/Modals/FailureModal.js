@@ -19,7 +19,6 @@ const FailureModal = props => {
     <div>
       <Modal
         isOpen={props.modalIsOpen}
-        // onAfterOpen={props.afterOpenModal}
         onRequestClose={props.closeModal}
         style={customStyles}
       >
