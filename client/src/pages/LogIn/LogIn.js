@@ -23,11 +23,11 @@ class LogIn extends Component {
 		}
 	}
 	onInputChange = event => {
-        this.setState({ [event.target.name]: event.target.value })
+		this.setState({ [event.target.name]: event.target.value })
 	}
 
 	onFormSubmit = event => {
-        event.preventDefault();
+		event.preventDefault();
 		const loginData = {
 			email: this.state.email,
 			password: this.state.password
@@ -36,14 +36,12 @@ class LogIn extends Component {
 			.then(res => {
 				if (res.data.validate === false) {
 					localStorage.clear()
-					console.log("Login failed")
 					this.setState({
 						statusMsg: "Login failed. The email/password did not match.",
 						email: "",
 						password: ""
 					})
-                } else if (res.data.validate === true ) {
-                    console.log("logged in!")
+				} else if (res.data.validate === true) {
 					localStorage.setItem('session_token', res.data.token)
 					localStorage.setItem('id', res.data.id)
 					localStorage.setItem('name', res.data.name)
@@ -51,64 +49,64 @@ class LogIn extends Component {
 				}
 			})
 			.catch(err => {
-				console.log('login error', err)
+				console.log(err)
 			})
 	}
 
 	render() {
 		return (
 			<div className="body">
-			<Grid columns="equal">
->			<Grid.Column>
-			</Grid.Column>
-			<Grid.Column textAlign="center">
-			<div className="logIn">
-						<div id="loginContent">
-						<Icon id="userIcon" color="orange" name="user" />
-						<h1 className="logInHeader">SuperMiles User Portal</h1>
-						<form id="loginForm" onSubmit={this.onFormSubmit}>
-							<Input
-								className="loginInput"
-								icon="mail"
-								iconPosition="left"
-								type="email"
-								placeholder="Email Address"
-								name="email"
-								value={this.state.email}
-								onChange={this.onInputChange}
-								required />
-							<br/>
-							<Input
-								className="loginInput"
-								icon="key"
-								iconPosition="left"
-								type="password"
-								placeholder="Password"
-								name="password"
-                                value={this.state.password}
-                                autoComplete="current-password"
-								pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-								title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters"
-								onChange={this.onInputChange}
-								required />
+				<Grid columns="equal">
+					<Grid.Column>
+					</Grid.Column>
+					<Grid.Column textAlign="center">
+						<div className="logIn">
+							<div id="loginContent">
+								<Icon id="userIcon" color="orange" name="user" />
+								<p className="logInHeader">SuperMiles User Portal</p>
+								<form id="loginForm" onSubmit={this.onFormSubmit}>
+									<Input
+										className="loginInput"
+										icon="mail"
+										iconPosition="left"
+										type="email"
+										placeholder="Email Address"
+										name="email"
+										value={this.state.email}
+										onChange={this.onInputChange}
+										required />
+									<br />
+									<Input
+										className="loginInput"
+										icon="key"
+										iconPosition="left"
+										type="password"
+										placeholder="Password"
+										name="password"
+										value={this.state.password}
+										autoComplete="current-password"
+										pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+										title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters"
+										onChange={this.onInputChange}
+										required />
 
-							<div>
-								<Button animated color="orange">
-									<Button.Content visible>Log In</Button.Content>
-									<Button.Content hidden>
-										<Icon name='arrow right' />
-									</Button.Content>
-								</Button>
+									<div>
+										<Button animated color="orange">
+											<Button.Content visible>Log In</Button.Content>
+											<Button.Content hidden>
+												<Icon name='arrow right' />
+											</Button.Content>
+										</Button>
+									</div>
+								</form>
+								{this.state.statusMsg}
 							</div>
-						</form>
-						{this.state.statusMsg}
-					</div>
-					</div>
+						</div>
 					</Grid.Column>
 					<Grid.Column>
 					</Grid.Column>
-					</Grid>
-					</div>
+				</Grid>
+			</div>
 		)
 	}
 }

@@ -6,13 +6,14 @@
 .logIn {
     background-color: rgb(173,216,230, 0.8);
     height: 90%;
-    margin-top: 40%;
+    margin-top: 35%;
     border-radius: 10px;
-  padding: 20px; 
+    padding: 20px; 
     -webkit-box-shadow: 7px 5px 15px -2px rgba(66,66,66,0.55); 
     box-shadow: 7px 5px 15px -2px rgba(66,66,66,0.55);
 }
 #loginContent {
+    text-align: center;
     position: relative;
     top: 100px;
 }
@@ -24,11 +25,36 @@
     margin-top: 5%;
 }
 
-h1 {
+.logInHeader {
+    text-align: center;
     color: darkorange;
-    font-size: 170px;
+    font-size: 45px;
+    font-weight: bold;
 }
 
 #userIcon {
     font-size: 60px;
 }
+
+@media only screen and (max-width: 1304px) {
+    .logIn {
+        background-color: unset;
+        padding: 0;
+        border-radius: unset;
+        -webkit-box-shadow: unset;
+        box-shadow: unset;
+        width: unset;
+    }
+}
+
+@media only screen and (max-width: 752px) {
+    .logInHeader {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 514px) {
+    .logInHeader {
+        font-size: 20px;
+    }
+  }
