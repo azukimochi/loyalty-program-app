@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 const db = require("../models")
+require('dotenv').config()
 
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/supermiles"
@@ -45,7 +46,14 @@ const usersSeed = [
     firstName: "Karen",
     lastName: "Kua",
     balance: 100000
-  }
+  },
+  {
+    email: process.env.EMAIL,
+    password: process.env.PASS,
+    firstName: process.env.FIRST_NAME,
+    lastName: process.env.LAST_NAME,
+    balance: 100000
+  },
 ]
 
 db.Inventory
