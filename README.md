@@ -51,3 +51,4 @@ password: dummyTest1234!
 This app was created by:
 
 * [azukimochi](https://github.com/azukimochi)
+She can be contacted via karen.kuak@gmail.com
