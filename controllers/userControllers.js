@@ -13,7 +13,7 @@ module.exports = {
 				} else {
 					if (dbUser.password === req.body.password) {
 						let user = dbUser
-						jwt.sign({ user }, "secretkey", { expiresIn: "300s" },
+						jwt.sign({ user }, "secretkey", { expiresIn: "1500s" },
 							(err, token) => {
 								res.json({
 									validate: true,
