@@ -6,6 +6,7 @@ import ConfirmationModal from "../../components/Modals/ConfirmationModal"
 import SuccessModal from "../../components/Modals/SuccessModal"
 import FailureModal from "../../components/Modals/FailureModal"
 import HeaderComponent from "../../components/Header/Header"
+import ColourGrid from "../../components/ColourGrid/ColourGrid"
 import { Grid, Header, Icon, Button } from "semantic-ui-react"
 import "./Dashboard.css"
 
@@ -71,6 +72,11 @@ class Dashboard extends Component {
             this.getRedemptionValue()
         })
     }
+
+    setColour = colour => {
+        this.setState({colour: colour}, 
+        () => this.getRedemptionValue()
+    )}
 
     getRedemptionValue = () => {
         const selectedColourObj = this.state.availableColours.filter(colourObj => colourObj.colour === this.state.colour)
@@ -242,13 +248,18 @@ class Dashboard extends Component {
         </Grid.Column>
         </Grid.Row>
         
-        <Grid.Row columns={2}>
-        <Grid.Column>
+        <Grid.Row columns={2} id="productRow">
+        <Grid.Column verticalAlign="middle">
+         <img id="airBudImg" src={require("../../images/airpods.jpeg")} alt="image"/>
         </Grid.Column>
-        <Grid.Column>
-        {this.state.availableColours !== null ? 
-        <div>
-        <div id="priceDiv"><span id="price">Price:</span> {this.state.redemptionValue} points</div>
+
+        <Grid.Column>    
+            {this.state.availableColours !== null ? 
+            <div>
+        <div id="priceDiv">
+        <span id="price">Price:</span> 
+        {this.state.redemptionValue} points
+        </div>
         <div id="dropdownContainer">
         <ColourDropDown 
         availableColours = {this.state.availableColours}
@@ -261,9 +272,27 @@ class Dashboard extends Component {
         handleDropDownChange = {this.handleDropDownChange}
         />
         </div>
+
+            {/* <Grid id="colourGrid" columns={6} padded> */}
+            {/* {this.state.availableColours.map(colour => (
+                <Grid.Column color={colour.colour.toLowerCase()} key={colour._id}>
+            <div onClick={() => this.setColour(colour.colour)}>{colour.colour}</div>
+            </Grid.Column>
+            ))} */}
+            <ColourGrid 
+            availableColours={this.state.availableColours}
+            setColour={this.setColour}
+            />
+            {/* </Grid> */}
+
+
+
         <br />
         <Button id="redeemBtn" color="blue" onClick={this.openConfirmationModal}>Redeem</Button>
         <div id="description">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

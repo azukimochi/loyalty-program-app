@@ -17,7 +17,7 @@ const inventorySeed = [
     price: 2000
   },
   {
-    colour: "White",
+    colour: "Grey",
     qty: 100,
     price: 1000
   },

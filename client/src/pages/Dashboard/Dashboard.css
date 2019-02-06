@@ -34,3 +34,32 @@
 #redeemBtn {
     width: 100%;
 }
+
+#airBudImg {
+    height: 80%;
+    margin: 0 20% 0 20%;
+}
+
+#productRow {
+    height: 100%;
+    background: white;
+}
+
+#colourDiv:hover {
+    font-size: 17px;
+}
+
+@media only screen and (max-width: 809px) {
+    #balanceDiv {
+        font-size: 80px;
+    }
+    #priceDiv {
+        font-size: 20px;
+    }
+    #colourGrid {
+        display: None;
+    }
+    #airBudImg {
+        width: 80%;
+    }
+  }
