@@ -3,23 +3,23 @@ const db = require('../models')
 module.exports = {
     getBalance: (req, res) => {
         db.Users
-        .findById({ _id: req.params.id })
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err))
+            .findById({ _id: req.params.id })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err))
     },
 
     getInventory: (req, res) => {
         db.Inventory
-        .find({qty: {$not: {$lte: 0}}})
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err))
+            .find({ qty: { $not: { $lte: 0 } } })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err))
     },
 
     showItemQty: (req, res) => {
         db.Inventory
-        .findOne({colour: req.params.colour})
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err))
+            .findOne({ colour: req.params.colour })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err))
     },
 
     insertOrder: (req, res) => {
@@ -50,5 +50,4 @@ module.exports = {
             })
             .catch(err => res.status(422).json(err))
     },
-
 }

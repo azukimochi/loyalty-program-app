@@ -26,17 +26,16 @@ class Dashboard extends Component {
     
     componentDidMount = () => {
     this.getBalance()
-    this.getInventory() 
-    console.log(this.state) 
+    this.getInventory()
     }
 
+    // Grabs the initial balance of the user after they've logged in
     getBalance = () => {
         API.getBalance({
             id: this.state.id,
             token: this.state.token
         })
             .then(res => {
-                console.log(res)
                 if (res.data.status === "404" || res.data === null) {
                     localStorage.clear()
                     this.props.history.push("/")
@@ -47,10 +46,10 @@ class Dashboard extends Component {
             .catch(err => console.log(err))
     }
 
+    // Grabs the available colours of AirBuds
     getInventory = () => {
         API.getInventory(this.state.token)
             .then(res => {
-                console.log(res)
                 if (res.data.status === "404") {
                     localStorage.clear()
                     this.props.history.push("/")
@@ -59,36 +58,38 @@ class Dashboard extends Component {
                         availableColours: res.data,
                         redemptionValue: res.data[0].price,
                         colour: res.data[0].colour
-                    }, () => console.log(this.state))
+                    })
                 }
             })
             .catch(err => console.log(err))
     }
-
+        
     handleDropDownChange = event => {
         let { name, value } = event.target;
-        this.setState({ [name]: value }, () => {
-            console.log(this.state)
-            this.getRedemptionValue()
-        })
+        this.setState({ [name]: value }, 
+            () => this.getRedemptionValue())
     }
-
+        
     setColour = colour => {
         this.setState({colour: colour}, 
-        () => this.getRedemptionValue()
+            () => this.getRedemptionValue()
     )}
 
+    logOut = () => {
+        localStorage.clear()
+        this.props.history.push("/")
+    }
+            
+    // Creates the subtotal amount of points for redemption based on qty multiplied by the products price
     getRedemptionValue = () => {
         const selectedColourObj = this.state.availableColours.filter(colourObj => colourObj.colour === this.state.colour)
-        console.log("selectedColourObj", selectedColourObj[0].price, typeof selectedColourObj[0].price)
         let redemptionValue = selectedColourObj[0].price * this.state.qty
-        console.log("redemptionValue", redemptionValue, typeof redemptionValue)
         this.setState({redemptionValue: redemptionValue})
     }
 
+    // ---Modal Functions (START)---
     openModal = () => {
-        this.setState({ modalIsOpen: true },
-        () => console.log("opening modal", this.state.modalSwitchExp))
+        this.setState({ modalIsOpen: true })
     }
 
     closeModal = () => {
@@ -101,22 +102,22 @@ class Dashboard extends Component {
             this.setState({modalSwitchExp: "confirmingOrder"},
             () => this.openModal())
     }
+    // ---Modal Functions (END)---
 
+
+    // ---Functions When Redeeming (START)---
     checkBalanceIsValid = () => {
         API.getBalance({
             id: this.state.id,
             token: this.state.token
         })
             .then(res => {
-                console.log(res)
                 if (res.data.status === "404") {
                     localStorage.clear()
                     this.props.history.push("/")
                 } else {
                     const remainingBalance = res.data.balance - this.state.redemptionValue
-                    console.log("remainingBalance", remainingBalance, typeof remainingBalance)
                     if (remainingBalance < 0) {
-                        console.log("Not enough balance")
                         this.setState({modalSwitchExp: "failByBalance"})
                     } else {
                         this.setState({balance: res.data.balance})
@@ -134,10 +135,8 @@ class Dashboard extends Component {
         })
         .then(res => {
             if (res.data.qty < this.state.qty) {
-                console.log("Not enough units in stock")
                 this.setState({modalSwitchExp: "failByQty"})
             } else {
-                console.log("enough units in stock")
                 this.completeOrder()
             }
         })
@@ -153,7 +152,6 @@ class Dashboard extends Component {
             redemptionValue: this.state.redemptionValue
         })
         .then(res => {
-            console.log(res)
             this.setState({
                 balance: res.data.balance,
                 modalSwitchExp: "success"
@@ -162,11 +160,9 @@ class Dashboard extends Component {
         .catch(err => console.log(err))
     }
 
-    logOut = () => {
-        localStorage.clear()
-        this.props.history.push("/")
-    }
+    // ---Functions When Redeeming (END)---
 
+    // Handles which Modal child component to render
     renderModalSwitch(exp) {
         switch(exp) {
           case "confirmingOrder":
@@ -236,46 +232,47 @@ class Dashboard extends Component {
             logOut={this.logOut}
             />
             {this.state.balance !== null ? 
-            <div id="balanceContainer">
-            <Header id="pointsHeader" as='h2' icon>
-            <Icon name='money' circular />
-            <Header.Content>Your Points</Header.Content>
-          </Header>
-            <div id="balanceDiv">{this.state.balance}</div> 
-            </div>
+                <div id="balanceContainer">
+                    <Header id="pointsHeader" as='h2' icon>
+                    <Icon name='money' circular />
+                    <Header.Content>Your Points</Header.Content>
+                    </Header>
+                    <div id="balanceDiv">{this.state.balance}</div> 
+                </div>
             : null
         }
         </Grid.Column>
         </Grid.Row>
-        
+
         <Grid.Row columns={2} id="productRow">
+
         <Grid.Column verticalAlign="middle">
          <img id="airBudImg" src={require("../../images/airpods.jpeg")} alt="image"/>
         </Grid.Column>
 
         <Grid.Column>    
-            {this.state.availableColours !== null ? 
+        {this.state.availableColours !== null ? 
             <div>
-        <div id="priceDiv">
-        <span className="boldSpan">Price:</span> 
-        {this.state.redemptionValue} points
+                <div id="priceDiv">
+                <span className="boldSpan">Price:</span> 
+                {this.state.redemptionValue} points
         </div>
         <div id="dropdownContainer">
-        <ColourDropDown 
-        availableColours = {this.state.availableColours}
-        colour = {this.state.colour}
-        handleDropDownChange = {this.handleDropDownChange}
-        />
-        <QtyDropDown 
-        availableQty = {availableQty}
-        qty = {this.state.qty}
-        handleDropDownChange = {this.handleDropDownChange}
-        />
-        </div>
-            <ColourGrid 
-            availableColours={this.state.availableColours}
-            setColour={this.setColour}
+            <ColourDropDown 
+            availableColours = {this.state.availableColours}
+            colour = {this.state.colour}
+            handleDropDownChange = {this.handleDropDownChange}
             />
+            <QtyDropDown 
+            availableQty = {availableQty}
+            qty = {this.state.qty}
+            handleDropDownChange = {this.handleDropDownChange}
+            />
+        </div>
+        <ColourGrid 
+        availableColours={this.state.availableColours}
+        setColour={this.setColour}
+        />
         <br />
         <Button id="redeemBtn" color="blue" onClick={this.openConfirmationModal}>Redeem</Button>
         <div id="description">
@@ -285,10 +282,7 @@ class Dashboard extends Component {
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    
-
-        </div>
-        
+        </div>    
         </div>
         : null
         }

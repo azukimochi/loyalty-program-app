@@ -12,11 +12,13 @@
     -webkit-box-shadow: 7px 5px 15px -2px rgba(66,66,66,0.55); 
     box-shadow: 7px 5px 15px -2px rgba(66,66,66,0.55);
 }
+
 #loginContent {
     text-align: center;
     position: relative;
     top: 100px;
 }
+
 .loginInput {
     margin-bottom: 3%;
 }
@@ -57,4 +59,4 @@
     .logInHeader {
         font-size: 20px;
     }
-  }
+}

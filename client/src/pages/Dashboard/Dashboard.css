@@ -54,13 +54,16 @@
     #balanceDiv {
         font-size: 80px;
     }
+
     #priceDiv {
         font-size: 20px;
     }
+
     #colourGrid {
         display: None;
     }
+
     #airBudImg {
         width: 80%;
     }
-  }
+}

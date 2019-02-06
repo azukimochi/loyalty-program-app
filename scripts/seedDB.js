@@ -60,7 +60,7 @@ db.Inventory
     process.exit(1);
   })
 
-  db.Users
+db.Users
   .remove({})
   .then(() => db.Users.collection.insertMany(usersSeed))
   .then(data => {

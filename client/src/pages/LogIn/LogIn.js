@@ -11,6 +11,7 @@ class LogIn extends Component {
 	}
 
 	componentDidMount = () => {
+		// Checks if the user has a valid session token and can thus be directed to their dashboard instead of having to login again
 		if (localStorage.getItem("session_token")) {
 			API.checkUserIsLoggedIn(localStorage.getItem("session_token"))
 				.then(res => {
@@ -26,6 +27,7 @@ class LogIn extends Component {
 		this.setState({ [event.target.name]: event.target.value })
 	}
 
+	// Handles the API call verifying the login credentials
 	onFormSubmit = event => {
 		event.preventDefault();
 		const loginData = {
@@ -89,7 +91,6 @@ class LogIn extends Component {
 										title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters"
 										onChange={this.onInputChange}
 										required />
-
 									<div>
 										<Button animated color="orange">
 											<Button.Content visible>Log In</Button.Content>
