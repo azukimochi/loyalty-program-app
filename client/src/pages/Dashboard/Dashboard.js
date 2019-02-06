@@ -98,7 +98,7 @@ class Dashboard extends Component {
     }
 
     openConfirmationModal = () => {
-            this.setState({modalSwitchExp: "success"},
+            this.setState({modalSwitchExp: "confirmingOrder"},
             () => this.openModal())
     }
 

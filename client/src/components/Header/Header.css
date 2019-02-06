@@ -1,7 +1,7 @@
 #headerContainer {
     width: 100%;
     text-align: right;
-    background: grey;
+    background: rgb(20,121,195);
     display: inline-flex;
     justify-content: flex-end;
     padding: 5px;
