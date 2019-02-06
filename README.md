@@ -6,7 +6,7 @@ This app aims to be a mock up of a redemption portal for loyalty points.  Curren
 
 ## Main Functionalities
 
-* Users will have to log into their SuperMiles account with their email and password.  A successful login will generate a JWT session token that will be validated with every API call to ensure the correct user is logged in and is thus capable of making changes to their account. For testing purposes, this app's JWT tokens expire in 15 minutes. 
+* Users will have to log into their SuperMiles account with their email and password.  A successful login will generate a JWT session token that will be validated with every API call to ensure the correct user is logged in and is thus capable of making changes to their account. For testing purposes, this app's JWT tokens expire in about 10 minutes. 
 * After logging in, the user is redirected to their dashboard. There, they will see their current balance of SuperMiles points and the AirBuds products that can be redeemed.  
 * By clicking on the quantity drop down, colour drop down and the colour cards, the price/value of the potential redemption is updated.
 * By clicking the *Redeem* button, a modal to confirm the order will pop up.  The user will either click *Cancel* to discard the order and return to the dashboard or *Redeem* to proceed with the order.  
@@ -48,7 +48,7 @@ password: dummyTest1234!
 
 ## Deployed Site
 
-This app has also been deployed on Heroku.  In this version, you will need to use the dummy account (login credentials are above).  The link to the Heroku app is https://supermiles-user-portal.herokuapp.com/. 
+This app has also been deployed on Heroku.  In this version, you will need to use the dummy account (the login credentials are above).  The link to the Heroku app is https://supermiles-user-portal.herokuapp.com/. 
 
 ## Creators
 
