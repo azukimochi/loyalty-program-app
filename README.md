@@ -50,6 +50,25 @@ password: dummyTest1234!
 
 This app has also been deployed on Heroku.  In this version, you will need to use the dummy account (the login credentials are above).  The link to the Heroku app is https://supermiles-user-portal.herokuapp.com/. 
 
+
+## Thought Process
+
+I decided to make this a full-stack application with React on the front end and Node.js on the back end.  Although a backend was not necessary and one could simply hard code any data to fetch instead, I wanted to do both the front and back end for these reasons:
+
+* I can add in session token validation using JWT web tokens.  This allows for further validation when users make API calls, thus ensure data is not incorrectly manipulated.  For example, if someone were to go away from their computer while logged in, when they return after some time, the program will prompt them to log in again if their session token has expired.  This prevents unauthorized users to create falsified orders in this case. 
+
+* By having a node-express envrionment, I can architect this application to have a MVC structure, which has become an industry standard for web applications.
+
+* By utilizing a database, such as MongoDB, I am able to associate orders with individual user accounts.  Specifically, the *Orders* collection is a ref in the *Users* collection, so whenever a new order document is inserted into the Orders collection, the document's id is also stored in the user's document.  Having a MongoDB database (with Mongoose) allows for simple relations to be brought forth between different collections.  As a future enhancement, I can now add in an order history for each user account because of the assoication between the *Orders* collection and *Users* collection.  I would just need to use the `populate` methods as per the Mongoose documentation. 
+
+I decided to use MongoDB instead of MySQL because the schema can be dynamic with the former, allowing me to easily change up the organization of data if needed when new features need to be added in. In the future, this application would need a MySQL database for more complex associations between data sets.  
+
+I decided to allow users to query colours via a dropdown and coloured cards.  The reason for having both is because some users are colour blind and thus would mistaken certain colours if they were to only have coloured cards to choose from. A dropdown with simple text solves this problem. 
+
+For the aforementioned session tokens, I purposely coded in the function that verifies the session token *before* any API call is able to proceed to the back end point.  This is seen in line 36 of `index.js` in the routes folder.  By doing so, API calls done by unauthorized users will be rejected, thus maintaining data integry.  Only the login-related routes do not have the verify function preceeding them because a session token does not need to be validated upon logging in. 
+
+ The app has been made responsive using Semantic UI and media queries.  Semantic UI's grid system is more compatible with React apps than Bootstrap.  
+
 ## Creators
 
 This app was created by:
