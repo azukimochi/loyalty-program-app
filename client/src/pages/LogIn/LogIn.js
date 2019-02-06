@@ -65,6 +65,7 @@ class LogIn extends Component {
 			<Grid.Column textAlign="center">
 			<div className="logIn">
 						<div id="loginContent">
+						<Icon id="userIcon" color="orange" name="user" />
 						<h1 className="logInHeader">SuperMiles User Portal</h1>
 						<form id="loginForm" onSubmit={this.onFormSubmit}>
 							<Input
