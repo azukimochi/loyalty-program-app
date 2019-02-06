@@ -1,0 +1,30 @@
+.body, html {
+    background-image: url("../../images/beach.jpg");
+    background-size: cover;
+}
+
+.logIn {
+    background-color: rgb(173,216,230, 0.8);
+    height: 90%;
+    margin-top: 40%;
+    border-radius: 10px;
+  padding: 20px; 
+    -webkit-box-shadow: 7px 5px 15px -2px rgba(66,66,66,0.55); 
+    box-shadow: 7px 5px 15px -2px rgba(66,66,66,0.55);
+}
+#loginContent {
+    position: relative;
+    top: 100px;
+}
+.loginInput {
+    margin-bottom: 3%;
+}
+
+#loginForm {
+    margin-top: 10%;
+}
+
+h1 {
+    color: darkorange;
+    font-size: 170px;
+}

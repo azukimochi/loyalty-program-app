@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import API from "../../utils/API.js"
+import { Grid, Input, Button, Icon } from "semantic-ui-react"
+import "./Login.css"
 
 class LogIn extends Component {
 	state = {
@@ -56,18 +58,30 @@ class LogIn extends Component {
 
 	render() {
 		return (
-			<div className='LogIn'>
-						<h1 className="logInHeader">Log In</h1>
-						<form onSubmit={this.onFormSubmit}>
-							<input
+			<div className="body">
+			<Grid columns="equal">
+>			<Grid.Column>
+			</Grid.Column>
+			<Grid.Column textAlign="center">
+			<div className="logIn">
+						<div id="loginContent">
+						<h1 className="logInHeader">SuperMiles User Portal</h1>
+						<form id="loginForm" onSubmit={this.onFormSubmit}>
+							<Input
+								className="loginInput"
+								icon="mail"
+								iconPosition="left"
 								type="email"
-								placeholder="Enter a valid email address"
+								placeholder="Email Address"
 								name="email"
 								value={this.state.email}
 								onChange={this.onInputChange}
 								required />
-
-							<input
+							<br/>
+							<Input
+								className="loginInput"
+								icon="key"
+								iconPosition="left"
 								type="password"
 								placeholder="Password"
 								name="password"
@@ -79,11 +93,21 @@ class LogIn extends Component {
 								required />
 
 							<div>
-								<button>Log In</button>
+								<Button animated color="orange">
+									<Button.Content visible>Log In</Button.Content>
+									<Button.Content hidden>
+										<Icon name='arrow right' />
+									</Button.Content>
+								</Button>
 							</div>
 						</form>
 						{this.state.statusMsg}
-
+					</div>
+					</div>
+					</Grid.Column>
+					<Grid.Column>
+					</Grid.Column>
+					</Grid>
 					</div>
 		)
 	}
