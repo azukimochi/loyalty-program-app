@@ -46,6 +46,10 @@ password: dummyTest1234!
 5. In the command line, run `yarn seed` at the root.  This will feed your MongoDB database with a default Inventory collection and User collection. 
 6. In the command line, run `yarn start` at the root. This will start your application.  The front-end (react) will run on port 3000 and the back-end (node.js) will run on port 3001.  Both ports must be available for them to proxy into each other.  As such, if your back-end ever fails, run `netstat -vanp tcp | grep 3001` in your command line at the root.  You will see various port credentials populate in the terminal for port 3001.  Run `kill -9 (insert PID number, or otherwise the number next to the 0 at the end)` and port 3001 should clear up.  You can also run `netstat -vanp tcp | grep 3001` again to check that it is free.  When the port is free, run `yarn start` at the root again to start up your application. 
 
+## Deployed Site
+
+This app has also been deployed on Heroku.  In this version, you will need to use the dummy account (login credentials are above).  The link to the Heroku app is https://supermiles-user-portal.herokuapp.com/. 
+
 ## Creators
 
 This app was created by:
