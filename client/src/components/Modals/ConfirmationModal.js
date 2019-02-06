@@ -1,5 +1,7 @@
 import React from "react"
 import Modal from "react-modal"
+import { Icon, Button } from "semantic-ui-react"
+import "./Modal.css"
 
 const customStyles = {
   content: {
@@ -10,7 +12,7 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)'
   }
-};
+}
 
 Modal.setAppElement('#root')
 
@@ -23,23 +25,34 @@ const ConfirmationModal = props => {
         style={customStyles}
       >
         <div className="modalContainer">
-          <p onClick={props.closeModal}>x</p>
+          <p className="closeP" onClick={props.closeModal}>x</p>
           <br />
-          <h2>Are you sure?</h2>
+          <p className="modalHeader">Are you sure?</p>
           <div className="modalBlurb">
-          You are about to redeem {props.redemptionValue} points for {props.qty} {props.colour} AirBud(s).
+            You are about to redeem {props.redemptionValue} points for {props.qty} {props.colour} AirBud(s).
           </div>
           <br />
-            
-          <button className="ui green button" onClick={props.negativeHandler}>
-            <i className="check icon"></i>
-            Cancel
-          </button>
+          <Button
+            className="modalBtn"
+            onClick={props.negativeHandler}
+            color="red"
+            animated='vertical'>
+            <Button.Content visible>Cancel</Button.Content>
+            <Button.Content hidden>
+              <Icon name="cancel" />
+            </Button.Content>
+          </Button>
 
-          <button className="ui red button" onClick={props.positiveHandler}>
-            <i className="check icon"></i>
-            Redeem
-        </button>
+          <Button 
+            className="modalBtn"
+            onClick={props.positiveHandler}
+            color="blue"
+            animated='vertical'>
+            <Button.Content visible>Redeem</Button.Content>
+            <Button.Content hidden>
+              <Icon name="check" />
+            </Button.Content>
+          </Button>
         </div>
       </Modal>
     </div>

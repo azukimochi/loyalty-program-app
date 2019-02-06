@@ -98,7 +98,7 @@ class Dashboard extends Component {
     }
 
     openConfirmationModal = () => {
-            this.setState({modalSwitchExp: "confirmingOrder"},
+            this.setState({modalSwitchExp: "success"},
             () => this.openModal())
     }
 
@@ -257,7 +257,7 @@ class Dashboard extends Component {
             {this.state.availableColours !== null ? 
             <div>
         <div id="priceDiv">
-        <span id="price">Price:</span> 
+        <span className="boldSpan">Price:</span> 
         {this.state.redemptionValue} points
         </div>
         <div id="dropdownContainer">
@@ -272,21 +272,10 @@ class Dashboard extends Component {
         handleDropDownChange = {this.handleDropDownChange}
         />
         </div>
-
-            {/* <Grid id="colourGrid" columns={6} padded> */}
-            {/* {this.state.availableColours.map(colour => (
-                <Grid.Column color={colour.colour.toLowerCase()} key={colour._id}>
-            <div onClick={() => this.setColour(colour.colour)}>{colour.colour}</div>
-            </Grid.Column>
-            ))} */}
             <ColourGrid 
             availableColours={this.state.availableColours}
             setColour={this.setColour}
             />
-            {/* </Grid> */}
-
-
-
         <br />
         <Button id="redeemBtn" color="blue" onClick={this.openConfirmationModal}>Redeem</Button>
         <div id="description">

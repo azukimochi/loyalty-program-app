@@ -1,5 +1,6 @@
 import React from "react"
 import Modal from "react-modal"
+import { Icon, Button } from "semantic-ui-react"
 
 const customStyles = {
   content: {
@@ -23,26 +24,38 @@ const SuccessModal = props => {
         style={customStyles}
       >
         <div className="modalContainer">
-          <p onClick={props.closeModal}>x</p>
+          <p className="closeP" onClick={props.closeModal}>x</p>
           <br />
-          <h2>Success!</h2>
+          <p className="modalHeader">Success!</p>
           <div className="modalBlurb">
-          <h4>Redeemed: {props.qty} {props.colour} AirBud(s) </h4>
-          <h4>Current Balance: {props.balance} points</h4>
+          <h4><span className="boldSubHeadings">Redeemed: </span>{props.qty} {props.colour} AirBud(s) </h4>
+          <h4><span className="boldSubHeadings">Current Balance: </span>{props.balance} points</h4>
           <br />
           <p>Do you want to redeem another AirBud?</p>
           </div>
           <br />
          
-          <button className="ui green button" onClick={props.negativeHandler}>
-            <i className="check icon"></i>
-            Logout
-          </button>
+          <Button
+            className="modalBtn"
+            onClick={props.negativeHandler}
+            color="red"
+            animated='vertical'>
+            <Button.Content visible>Log Out</Button.Content>
+            <Button.Content hidden>
+              <Icon name="user times" />
+            </Button.Content>
+          </Button>
 
-          <button className="ui red button" onClick={props.positiveHandler}>
-            <i className="check icon"></i>
-            Redeem Another
-        </button>
+          <Button 
+            className="modalBtn"
+            onClick={props.positiveHandler}
+            color="blue"
+            animated='vertical'>
+            <Button.Content visible>Redeem Another</Button.Content>
+            <Button.Content hidden>
+              <Icon name="check" />
+            </Button.Content>
+          </Button>
         </div>
       </Modal>
     </div>

@@ -1,5 +1,6 @@
 import React from "react"
 import Modal from "react-modal"
+import { Icon, Button } from "semantic-ui-react"
 
 const customStyles = {
   content: {
@@ -10,7 +11,7 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)'
   }
-};
+}
 
 Modal.setAppElement('#root')
 
@@ -23,22 +24,25 @@ const FailureModal = props => {
         style={customStyles}
       >
         <div className="modalContainer">
-          <p onClick={props.closeModal}>x</p>
+          <p className="closeP" onClick={props.closeModal}>x</p>
           <br />
-          <h2>We're sorry, but we can't process your order.</h2>
+          <p className="modalHeader">We're sorry, but we can't process your order.</p>
           <div className="modalBlurb">
-
-          {props.reason === "failByBalance" ? 
-          <p>You don't have enough points.</p> :
-          <p>We don't have enough of that colour in stock.</p>}
-
+            {props.reason === "failByBalance" ?
+              <p>You don't have enough points.</p> :
+              <p>We don't have enough of that colour in stock.</p>}
           </div>
           <br />
-
-          <button className="ui red button" onClick={props.negativeHandler}>
-            <i className="check icon"></i>
-            Go back
-        </button>
+          <Button
+            id="failModalBtn"
+            onClick={props.negativeHandler}
+            color="red"
+            animated='vertical'>
+            <Button.Content visible>Go back</Button.Content>
+            <Button.Content hidden>
+              <Icon name="arrow left" />
+            </Button.Content>
+          </Button>
         </div>
       </Modal>
     </div>
