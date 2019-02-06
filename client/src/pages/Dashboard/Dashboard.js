@@ -5,7 +5,7 @@ import QtyDropDown from "../../components/DropDowns/QtyDropDown"
 import ConfirmationModal from "../../components/Modals/ConfirmationModal"
 import SuccessModal from "../../components/Modals/SuccessModal"
 import FailureModal from "../../components/Modals/FailureModal"
-
+import Header from "../../components/Header/Header"
 
 class Dashboard extends Component {
 
@@ -216,8 +216,13 @@ class Dashboard extends Component {
         const availableQty = [...Array(6).keys()]
         availableQty.splice(0,1)
 
+        const name=localStorage.getItem("name")
         return(
             <div className="dashboardContainer">
+            <Header 
+            name={name}
+            logOut={this.logOut}
+            />
             {this.state.balance !== null ? 
             <div>Balance: {this.state.balance} points</div> 
             : null

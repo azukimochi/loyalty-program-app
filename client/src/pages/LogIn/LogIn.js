@@ -47,7 +47,6 @@ class LogIn extends Component {
 					localStorage.setItem('session_token', res.data.token)
 					localStorage.setItem('id', res.data.id)
 					localStorage.setItem('name', res.data.name)
-					localStorage.setItem('auth', true)
 					this.props.history.push('/dashboard')
 				}
 			})

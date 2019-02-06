@@ -1,0 +1,19 @@
+#headerContainer {
+    width: 100%;
+    text-align: right;
+    background: grey;
+    display: inline-flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+#logOutBtn {
+    font-size: 12px;
+}
+
+#greeting {
+    font-size: 15px;
+    padding: 5px;
+    color: white;
+    margin-right: 5px
+}
