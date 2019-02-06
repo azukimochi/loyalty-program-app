@@ -1,0 +1,36 @@
+#balanceDiv {
+    font-size: 100px;
+    font-weight: bold;
+    padding: 40px;
+}
+
+#pointsHeader {
+    margin: 20px;
+}
+
+#balanceContainer {
+    background: lightblue;
+    height: 290px;
+}
+
+#dropdownContainer {
+    display: inline-flex;
+    font-size: 15px;
+}
+
+#qtyDropDown, #colourDropDown, #description, #redeemBtn {
+    margin: 10px 10px 10px 0;
+}
+
+#priceDiv {
+    font-size: 40px;
+    margin: 10px 10px 10px 0;
+}
+
+#price {
+   font-weight: bold;
+}
+
+#redeemBtn {
+    width: 100%;
+}

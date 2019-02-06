@@ -5,7 +5,9 @@ import QtyDropDown from "../../components/DropDowns/QtyDropDown"
 import ConfirmationModal from "../../components/Modals/ConfirmationModal"
 import SuccessModal from "../../components/Modals/SuccessModal"
 import FailureModal from "../../components/Modals/FailureModal"
-import Header from "../../components/Header/Header"
+import HeaderComponent from "../../components/Header/Header"
+import { Grid, Header, Icon, Button } from "semantic-ui-react"
+import "./Dashboard.css"
 
 class Dashboard extends Component {
 
@@ -219,17 +221,35 @@ class Dashboard extends Component {
         const name=localStorage.getItem("name")
         return(
             <div className="dashboardContainer">
-            <Header 
+            <Grid>
+
+            <Grid.Row>
+            <Grid.Column textAlign="center">
+            <HeaderComponent 
             name={name}
             logOut={this.logOut}
             />
             {this.state.balance !== null ? 
-            <div>Balance: {this.state.balance} points</div> 
+            <div id="balanceContainer">
+            <Header id="pointsHeader" as='h2' icon>
+            <Icon name='money' circular />
+            <Header.Content>Your Points</Header.Content>
+          </Header>
+            <div id="balanceDiv">{this.state.balance}</div> 
+            </div>
             : null
         }
+        </Grid.Column>
+        </Grid.Row>
+        
+        <Grid.Row columns={2}>
+        <Grid.Column>
+        </Grid.Column>
+        <Grid.Column>
         {this.state.availableColours !== null ? 
         <div>
-            <div>Price: {this.state.redemptionValue} points</div>
+        <div id="priceDiv"><span id="price">Price:</span> {this.state.redemptionValue} points</div>
+        <div id="dropdownContainer">
         <ColourDropDown 
         availableColours = {this.state.availableColours}
         colour = {this.state.colour}
@@ -240,14 +260,25 @@ class Dashboard extends Component {
         qty = {this.state.qty}
         handleDropDownChange = {this.handleDropDownChange}
         />
+        </div>
+        <br />
+        <Button id="redeemBtn" color="blue" onClick={this.openConfirmationModal}>Redeem</Button>
+        <div id="description">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    
 
-        <button onClick={this.openConfirmationModal}>Redeem</button>
+        </div>
+        
         </div>
         : null
         }
 
         {this.renderModalSwitch(this.state.modalSwitchExp)}
-
+        </Grid.Column>
+        </Grid.Row>
+    </Grid>
         </div>
         )
     }
