@@ -57,4 +57,4 @@ This app was created by:
 * [azukimochi](https://github.com/azukimochi)
 She can be contacted via karen.kuak@gmail.com
 
-![](https://azukimochi.github.io/super-miles/README_images/screenshot.png)
+![](README_images/screenshot.png)
